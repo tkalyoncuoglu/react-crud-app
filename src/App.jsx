@@ -44,14 +44,6 @@ function App() {
     toast.success("Kitap başarıyla eklendi",{autoClose: 2000})
   };
 
-  // silme modal'ı için fonksiyon
-  const handleModal = (id) => {
-    // silinecek elemanın id'sini state'e aktarma
-    setDeleteId(id);
-
-    // modal'ı açar
-    setShowDelete(true);
-  };
 
   // silme işlemini yapar
   const handleDelete = () => {
@@ -93,14 +85,7 @@ function App() {
 
   };
 
-  // edit modal işlemleri
-  const handleEditModal = (item) => {
-    // modal'ı açar
-    setShowEdit(true);
-
-    // düzenlenecek elemanı state'e aktarma
-    setEditingItem(item);
-  };
+  
 
   // elemanı güncelleme
   const updateItem = () => {
@@ -142,10 +127,12 @@ function App() {
         {/* Kitaplar dizisi dolu ise */}
         {books.map((book) => (
           <BookCard key={book.id}
-           handleModal={handleModal}
+           setDeleteId = {setDeleteId}
+           setShowDelete={setShowDelete}
             data={book}
             handleRead={handleRead}
-            handleEditModal={handleEditModal} />
+            setShowEdit={setShowEdit}
+            setEditingItem={setEditingItem} />
             
         ))}
       </main>
@@ -160,7 +147,6 @@ function App() {
 
       {showEdit && (<EditModal editingItem={editingItem}
        setShowEdit={setShowEdit}
-       setEditingItem={setEditingItem}
        updateItem={updateItem}
         />)}
 
